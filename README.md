@@ -42,6 +42,7 @@ mongo --version
 spring.data.mongodb.uri=mongodb://localhost:27017/pahanaedu
 spring.jpa.hibernate.ddl-auto=none
 server.port=8080
+
 ✅ pahanaedu is the database name (When running the spring boot application it will be created automatically by MongoDB if not present).
 
 4️⃣ Build the project
