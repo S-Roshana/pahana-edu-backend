@@ -24,8 +24,10 @@ cd pahana-edu-backend
 Before running the project, ensure you have:
 
 **Java 17 (or compatible version)
+
 Maven 3.6+
-MongoDB (running locally on default port 27017)**
+
+MongoDB Compass (running locally on default port 27017)**
 
 👉 Verify installations:
 
@@ -40,27 +42,26 @@ mongo --version
 **properties**
 
 spring.data.mongodb.uri=mongodb://localhost:27017/pahanaedu
+
 spring.jpa.hibernate.ddl-auto=none
+
 server.port=8080
 
-✅ pahanaedu is the database name (When running the spring boot application it will be created automatically by MongoDB if not present).
+✅ pahandb is the database name (When running the spring boot application it will be created automatically by MongoDB if not present).
 
-4️⃣ Build the project
+## 🔧 Setup Instructions
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/S-Roshana/pahana-edu-backend.git
+   
+   cd pahana-edu-backend
+
+**Start MongoDB (use MongoDB Compass or mongod in CLI)**
+
 👉 While inside the pahana-edu-backend/ directory:
 
-
-mvn clean install
-➡ **This will compile your code and package it as a jar file under:**
-
-pahana-edu-backend/target/
-
-5️⃣ Run the server
-👉 From the pahana-edu-backend/ directory:
-
-**mvn spring-boot:run**
-or
-
-**java -jar target/pahana-edu-backend-0.0.1-SNAPSHOT.jar**
+./mvnw spring-boot:run
 
 
 ✅ The backend will start at:
