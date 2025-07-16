@@ -11,11 +11,12 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // generate random key
-    private static final long EXPIRATION_MS = 1000 * 60 * 60 * 10; // 10 hours
+    private static final long EXPIRATION_MS = 1000 * 60 * 60 * 2; // 2 hours
 
-    public static String generateToken(String username) {
+    public static String generateToken(String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
                 .signWith(key)
@@ -29,6 +30,11 @@ public class JwtUtil {
     // Extract username from token (alias for consistency)
     public static String extractUsername(String token) {
         return getUsernameFromToken(token);
+    }
+
+    // Extract role from token
+    public static String extractRole(String token) {
+        return extractClaim(token, claims -> (String) claims.get("role"));
     }
 
     // Extract expiration date from token

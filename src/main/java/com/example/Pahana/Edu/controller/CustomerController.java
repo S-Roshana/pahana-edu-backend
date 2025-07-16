@@ -30,6 +30,8 @@ public class CustomerController {
                     c.setAddress(updated.getAddress());
                     c.setUsername(updated.getUsername());
                     c.setPassword(updated.getPassword());
+                    // Preserve role and accountNumber
+                    // (do not update from 'updated', keep existing values)
                     Customer saved = customerRepository.save(c);
                     return ResponseEntity.ok(saved);
                 })

@@ -13,6 +13,8 @@ public class Customer {
     private String name;
     private String contactNo;
     private String address;
+    private String accountNumber;
+    private String role = "customer";
    
 
     // Default constructor
@@ -46,4 +48,9 @@ public class Customer {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
+    public String getAccountNumber() { return accountNumber; }
+    public void setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
