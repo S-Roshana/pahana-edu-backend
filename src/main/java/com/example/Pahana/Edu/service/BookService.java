@@ -46,6 +46,18 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public Book updateBook(String id, Book updated) {
+        Book book = findById(id);
+        book.setTitle(updated.getTitle());
+        book.setAuthor(updated.getAuthor());
+        book.setDescription(updated.getDescription());
+        book.setImageUrl(updated.getImageUrl());
+        book.setPrice(updated.getPrice());
+        book.setQuantity(updated.getQuantity());
+        book.setCategory(updated.getCategory());
+        return bookRepository.save(book);
+    }
+
 
     public Book reduceQuantity(String id, int quantity) {
         Book book = findById(id);

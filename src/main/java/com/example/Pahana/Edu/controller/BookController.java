@@ -163,4 +163,14 @@ public class BookController {
             return ResponseEntity.status(500).body("Error getting user rating: " + e.getMessage());
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book updated) {
+        try {
+            Book saved = bookService.updateBook(id, updated);
+            return ResponseEntity.ok(saved);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

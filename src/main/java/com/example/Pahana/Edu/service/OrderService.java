@@ -26,6 +26,7 @@ public class OrderService {
         order.setBookTitle(book.getTitle());
         order.setTotalPrice(book.getPrice() * order.getQuantity());
         order.setOrderDate(LocalDateTime.now());
+        // customerEmail is set from the incoming order object
 
         orderRepository.save(order);
         return "Order placed successfully";

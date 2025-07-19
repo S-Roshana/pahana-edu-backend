@@ -56,4 +56,9 @@ public class OrderController {
     public List<Order> getOrdersByCustomer(@PathVariable String contact) {
         return orderRepository.findByCustomerContact(contact);
     }
+
+    @GetMapping("/byEmail/{email}")
+    public List<Order> getOrdersByCustomerEmail(@PathVariable String email) {
+        return orderRepository.findByCustomerEmail(email);
+    }
 }

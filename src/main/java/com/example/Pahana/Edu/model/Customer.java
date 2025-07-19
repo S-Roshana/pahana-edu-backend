@@ -15,6 +15,7 @@ public class Customer {
     private String address;
     private String accountNumber;
     private String role = "customer";
+    private String accountStatus = "ACTIVE"; // Possible values: ACTIVE, INACTIVE
    
 
     // Default constructor
@@ -53,4 +54,7 @@ public class Customer {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+
+    public String getAccountStatus() { return accountStatus; }
+    public void setAccountStatus(String accountStatus) { this.accountStatus = accountStatus; }
 }

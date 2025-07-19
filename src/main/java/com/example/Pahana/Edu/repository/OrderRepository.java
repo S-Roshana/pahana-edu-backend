@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends MongoRepository<Order, String> {
     List<Order> findByCustomerContact(String customerContact);
+    List<Order> findByCustomerEmail(String customerEmail);
 }

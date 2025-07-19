@@ -46,6 +46,8 @@ public class AuthController {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         // Generate unique account number
         customer.setAccountNumber(generateUniqueAccountNumber());
+        // Ensure account status is ACTIVE for new registrations
+        customer.setAccountStatus("ACTIVE");
         Customer saved = customerRepository.save(customer);
         return ResponseEntity.ok(saved);
     }
@@ -58,6 +60,10 @@ public class AuthController {
         Optional<Customer> optCustomer = customerRepository.findByUsername(username);
 
         if (optCustomer.isPresent() && passwordEncoder.matches(password, optCustomer.get().getPassword()) && "customer".equals(optCustomer.get().getRole())) {
+            // Check account status
+            if (!"ACTIVE".equals(optCustomer.get().getAccountStatus())) {
+                return ResponseEntity.status(403).body("Account is deactivated. Contact support.");
+            }
             String token = JwtUtil.generateToken(username, "customer");
             return ResponseEntity.ok(Map.of(
                     "token", token,

@@ -16,6 +16,7 @@ public class Order {
     private String customerName;
     private String customerAddress;
     private String customerContact;
+    private String customerEmail;
     private int quantity;
     private double totalPrice;
     private LocalDateTime orderDate;
@@ -25,12 +26,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(String bookId, String bookTitle, String customerName, String customerAddress, String customerContact, int quantity, double totalPrice, LocalDateTime orderDate, String paymentMethod) {
+    public Order(String bookId, String bookTitle, String customerName, String customerAddress, String customerContact, String customerEmail, int quantity, double totalPrice, LocalDateTime orderDate, String paymentMethod) {
         this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerContact = customerContact;
+        this.customerEmail = customerEmail;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
@@ -85,6 +87,14 @@ public class Order {
 
     public void setCustomerContact(String customerContact) {
         this.customerContact = customerContact;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public int getQuantity() {
