@@ -1,7 +1,7 @@
 package com.example.Pahana.Edu.controller;
 
-import com.example.Pahana.Edu.model.Customer;
-import com.example.Pahana.Edu.repository.CustomerRepository;
+import com.example.Pahana.Edu.model.User;
+import com.example.Pahana.Edu.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +9,6 @@ import com.example.Pahana.Edu.security.JwtUtil;
 import java.util.Optional;
 
 import java.util.Map;
-import com.example.Pahana.Edu.model.Admin;
-import com.example.Pahana.Edu.repository.AdminRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Random;
 
@@ -20,10 +18,9 @@ import java.util.Random;
 public class AuthController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository customerRepository;
 
-    @Autowired
-    private AdminRepository adminRepository;
+   
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -38,7 +35,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Customer customer) {
+    public ResponseEntity<?> register(@RequestBody User customer) {
         if (customerRepository.findByUsername(customer.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username already exists");
         }
@@ -48,7 +45,7 @@ public class AuthController {
         customer.setAccountNumber(generateUniqueAccountNumber());
         // Ensure account status is ACTIVE for new registrations
         customer.setAccountStatus("ACTIVE");
-        Customer saved = customerRepository.save(customer);
+        User saved = customerRepository.save(customer);
         return ResponseEntity.ok(saved);
     }
 
@@ -57,7 +54,7 @@ public class AuthController {
         String username = payload.get("username");
         String password = payload.get("password");
 
-        Optional<Customer> optCustomer = customerRepository.findByUsername(username);
+        Optional<User> optCustomer = customerRepository.findByUsername(username);
 
         if (optCustomer.isPresent() && passwordEncoder.matches(password, optCustomer.get().getPassword()) && "customer".equals(optCustomer.get().getRole())) {
             // Check account status
@@ -80,7 +77,7 @@ public class AuthController {
         String username = payload.get("username");
         String password = payload.get("password");
 
-        Optional<Admin> optAdmin = adminRepository.findByUsername(username);
+        Optional<User> optAdmin = customerRepository.findByUsername(username);
 
         if (optAdmin.isPresent() && optAdmin.get().getPassword().equals(password) && "admin".equals(optAdmin.get().getRole())) {
             String token = JwtUtil.generateToken(username, "admin");

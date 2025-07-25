@@ -3,8 +3,8 @@ package com.example.Pahana.Edu.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "customers")
-public class Customer {
+@Document(collection = "user")
+public class User {
 
     @Id
     private String id;
@@ -19,10 +19,10 @@ public class Customer {
    
 
     // Default constructor
-    public Customer() {}
+    public User() {}
 
     // Full constructor
-    public Customer(String username, String password, String name, String contactNo, String address) {
+    public User(String username, String password, String name, String contactNo, String address) {
         this.username = username;
         this.password = password;
         this.name = name;

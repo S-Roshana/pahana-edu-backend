@@ -1,7 +1,7 @@
 package com.example.Pahana.Edu.controller;
 
-import com.example.Pahana.Edu.model.Customer;
-import com.example.Pahana.Edu.repository.CustomerRepository;
+import com.example.Pahana.Edu.model.User;
+import com.example.Pahana.Edu.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +11,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customers")
 @CrossOrigin
-public class CustomerController {
+public class UserController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository customerRepository;
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
+    public List<User> getAllCustomers() {
         return customerRepository.findAll();
     }
 
@@ -29,7 +29,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCustomer(@PathVariable String id, @RequestBody Customer updated) {
+    public ResponseEntity<?> updateCustomer(@PathVariable String id, @RequestBody User updated) {
         return customerRepository.findById(id)
                 .map(c -> {
                     c.setName(updated.getName());
@@ -39,7 +39,7 @@ public class CustomerController {
                     c.setPassword(updated.getPassword());
                     // Preserve role and accountNumber
                     // (do not update from 'updated', keep existing values)
-                    Customer saved = customerRepository.save(c);
+                    User saved = customerRepository.save(c);
                     return ResponseEntity.ok(saved);
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -50,7 +50,7 @@ public class CustomerController {
         return customerRepository.findById(id)
                 .map(c -> {
                     c.setAccountStatus("ACTIVE");
-                    Customer saved = customerRepository.save(c);
+                    User saved = customerRepository.save(c);
                     return ResponseEntity.ok(saved);
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -61,7 +61,7 @@ public class CustomerController {
         return customerRepository.findById(id)
                 .map(c -> {
                     c.setAccountStatus("INACTIVE");
-                    Customer saved = customerRepository.save(c);
+                    User saved = customerRepository.save(c);
                     return ResponseEntity.ok(saved);
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());

@@ -1,9 +1,9 @@
 package com.example.Pahana.Edu.controller;
 
 import com.example.Pahana.Edu.model.Book;
-import com.example.Pahana.Edu.model.Customer;
+import com.example.Pahana.Edu.model.User;
 import com.example.Pahana.Edu.service.BookService;
-import com.example.Pahana.Edu.repository.CustomerRepository;
+import com.example.Pahana.Edu.repository.UserRepository;
 import com.example.Pahana.Edu.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class BookController {
     private BookService bookService;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository customerRepository;
 
     @GetMapping
     public List<Book> getAllBooks() {
@@ -81,7 +81,7 @@ public class BookController {
             }
 
             // Get user ID from database
-            Optional<Customer> customer = customerRepository.findByUsername(username);
+            Optional<User> customer = customerRepository.findByUsername(username);
             if (!customer.isPresent()) {
                 return ResponseEntity.status(404).body("User not found");
             }
@@ -116,7 +116,7 @@ public class BookController {
             }
 
             // Get user ID
-            Optional<Customer> customer = customerRepository.findByUsername(username);
+            Optional<User> customer = customerRepository.findByUsername(username);
             if (!customer.isPresent()) {
                 return ResponseEntity.status(404).body("User not found");
             }
@@ -146,7 +146,7 @@ public class BookController {
             }
 
             // Get user ID
-            Optional<Customer> customer = customerRepository.findByUsername(username);
+            Optional<User> customer = customerRepository.findByUsername(username);
             if (!customer.isPresent()) {
                 return ResponseEntity.status(404).body("User not found");
             }
